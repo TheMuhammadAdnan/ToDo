@@ -1,0 +1,10 @@
+{% for task in tasks %}
+    <div>
+        <h3>{{task.title}}</h3>
+        <p>{{task.description}}</P>
+        <p>Due Date:{{task.due_date}}</P>
+        <p>Category:{{task.category}}</P>
+        <p>Completed:{{task.completed}}</p>
+    </div>
+{% endfor %}    
+        
