@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Task
+from .models import Task,TaskCategory,User
 from .forms import TaskForm
 
 def create_task(request):
@@ -10,6 +10,8 @@ def create_task(request):
             task.user = request.user
             task.save()
             return redirect('task_list')
+        else:
+            print(form.errors)
     else:
         form = TaskForm()
     return render(request, 'create_task.html', {'form':form})
