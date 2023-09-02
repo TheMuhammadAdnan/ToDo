@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
 
 
-@login_required
 def create_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
