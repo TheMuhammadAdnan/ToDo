@@ -37,7 +37,6 @@ Explore the project, contribute to its development, and make task management a b
 - Create, edit, and delete tasks
 - Categorize tasks into different lists
 - Mark tasks as complete
-- ...
 ## Contact
 If you have any questions or suggestions, feel free to contact us at sherazsafdar00@gmail.com
 
