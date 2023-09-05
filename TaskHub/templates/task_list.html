@@ -5,6 +5,8 @@
         <p>Due Date:{{task.due_date}}</P>
         <p>Category:{{task.category}}</P>
         <p>Completed:{{task.completed}}</p>
+
+        <a href="{% url 'update_task' task.id %}">Edit</a>
     </div>
 {% endfor %}    
         
