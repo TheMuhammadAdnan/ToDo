@@ -1,0 +1,12 @@
+<h2>Delete Task</h2>
+<h3>Are you sure you want to delete this task?</h3>
+<p>Title: {{ task.title }}</p>
+<p>Description: {{ task.description }}</p>
+<p>Due Date: {{ task.due_date }}</p>
+<p>Category: {{ task.category }}</p>
+<p>Completed: {{ task.completed }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+</form>

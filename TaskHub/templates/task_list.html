@@ -1,3 +1,12 @@
+<h2>Task List</h2>
+
+<!-- Search Form -->
+<form method="get">
+    {{ search_form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+<!-- Task List -->
 {% for task in tasks %}
     <div>
         <h3>{{task.title}}</h3>
@@ -5,8 +14,12 @@
         <p>Due Date:{{task.due_date}}</P>
         <p>Category:{{task.category}}</P>
         <p>Completed:{{task.completed}}</p>
-
-        <a href="{% url 'update_task' task.id %}">Edit</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'update_task' task.id %}">Edit</a>
+            <a href="{% url 'delete_task' task.id %}">Delete</a>
+        {% endif %}
     </div>
+{% empty %}
+    <p>No tasks found.</p>
 {% endfor %}    
         
