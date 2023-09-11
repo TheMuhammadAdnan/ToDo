@@ -12,7 +12,7 @@ from .forms import TaskSearchForm
 
 
 def homepage(request):
-    return render(request, 'base.html')
+    return render(request, 'base.html') # for what purpose we have this view?
 
 @login_required
 def create_task(request):
@@ -24,7 +24,7 @@ def create_task(request):
             task.save()
             return redirect('task_list')
         else:
-            print(form.errors)
+            print(form.errors) ## instead of print the error on console display the form related errors on FE
     else:
         form = TaskForm()
     return render(request, 'create_task.html', {'form':form})
@@ -34,16 +34,16 @@ def task_list(request):
     tasks = Task.objects.filter(user=request.user)
     # Handle the search query if provided
     search_form = TaskSearchForm(request.GET)
-    if search_form.is_valid():
+    if search_form.is_valid():  # handle the case if form is not valid
         search_query = search_form.cleaned_data['search_query']
-        tasks = tasks.filter(title__icontains=search_query)
+        tasks = tasks.filter(title__icontains=search_query) # make the search more dynamic user can also search based on the content or description in the task?
     return render(request, 'task_list.html', {'tasks': tasks, 'search_form': search_form})        
 
 
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # handle the case if form is not valid
             user = form.save()
             login(request, user)
             return redirect('task_list')
@@ -54,11 +54,11 @@ def signup(request):
 
 @login_required
 def update_task(request, task_id):
-    task = get_object_or_404(Task, id=task_id)
+    task = get_object_or_404(Task, id=task_id) # code is not secured the task can be updated the not belongs to the same user, add a check that task is belongs to the same user that send request to update the task
     
     if request.method=='POST':
         form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
+        if form.is_valid():  # handle the case if form is not valid
             form.save()
             return redirect('task_list')
     else:
@@ -67,7 +67,7 @@ def update_task(request, task_id):
 
 @login_required
 def delete_task(request, task_id):
-    task = get_object_or_404(Task, id=task_id)
+    task = get_object_or_404(Task, id=task_id) # code is not secured the task can be deleted the not belongs to the same user, add a check that task is belongs to the same user that send request to delete the task
     
     if request.method=="POST":
         task.delete()
@@ -79,7 +79,7 @@ def delete_task(request, task_id):
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # handle the case if form is not valid
             user = form.save()
             login(request, user)  # Log the user in after registration
             return redirect(reverse_lazy('login'))  # Redirect to the login page using reverse_lazy
@@ -91,7 +91,7 @@ def register(request):
 def custom_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
+        if form.is_valid(): # handle the case if form is not valid
             login(request, form.get_user())
             return redirect('task_list')  # Redirect to the task list page after login
     else:

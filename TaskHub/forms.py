@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'due_date', 'category', 'completed']
+        fields = ['title', 'description', 'due_date', 'category', 'completed'] # instead of fields use exclude? 
         
     
 class SignUpForm(UserCreationForm):
